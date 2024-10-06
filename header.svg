@@ -1,0 +1,154 @@
+<svg fill="#000" viewBox="0 0 800 400" width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        :root {
+          --duration: 40s;
+        }
+        .container {
+          font-family:
+            system-ui,
+            -apple-system,
+            'Segoe UI',
+            Roboto,
+            Helvetica,
+            Arial,
+            sans-serif,
+            'Apple Color Emoji',
+            'Segoe UI Emoji';
+          position: relative;
+          margin: 0;
+          width: 200%;
+          height: 400px;
+        }
+        .space {
+          position: absolute;
+          width: 100%;
+          height: 200%;
+          background: linear-gradient(45deg, #0d1117 0%, 30%, #284259 40%, #1e2047 60%, #0d1117 75%, #284259 100%);
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='filter'%3E%3CfeTurbulence baseFrequency='0.2'/%3E%3CfeColorMatrix values='0 0 0 9 -4 0 0 0 9 -4 0 0 0 9 -4 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23filter)'/%3E%3C/svg%3E%0A");
+          background-size: 100% 100%;
+          transform:  translateX(0%) translateY(-25%);
+          will-change: transform;
+          animation: var(--duration) ease-in-out infinite normal spacePanning;
+        }
+        @keyframes spacePanning {
+            0% { transform: translateX(0%)   translateY(-25%); }
+           10% { transform: translateX(0%)   translateY(-25%); }
+           50% { transform: translateX(-50%) translateY(0%); }
+           60% { transform: translateX(-50%) translateY(0%); }
+          100% { transform: translateX(0%)   translateY(-25%); }
+        }
+
+        .planet {
+          position: absolute;
+          left: 480px;
+          top: 100px;
+          font-size: 150px;
+          line-height: 80px;
+          z-index: 8;
+          animation: var(--duration) ease-in-out infinite normal planetMoving;
+        }
+        @keyframes planetMoving {
+            0% { transform: translateX(400px) translateY(-100px); }
+           20% { transform: translateX(400px) translateY(-100px); }
+           45% { transform: translateX(0)     translateY(0); }
+           60% { transform: translateX(0)     translateY(0); }
+           80% { transform: translateX(400px) translateY(-100px); }
+          100% { transform: translateX(400px) translateY(-100px); }
+        }
+        .planet::after {
+          content: '🪐';
+          position: absolute;
+          will-change: transform;
+          animation: 5s linear infinite alternate planetRocking;
+        }
+        @keyframes planetRocking {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(10deg); }
+        }
+
+        .rocket {
+          width: 60px;
+          height: 60px;
+          position: absolute;
+          left: 110px;
+          top: 190px;
+          font-size: 60px;
+          transform: scale(0);
+          will-change: transform, z-index;
+          animation: var(--duration) linear infinite normal rocketMoving;
+          z-index: 7;
+        }
+        @keyframes rocketMoving {
+            /* have to bring the transform-origin along, so that rotating works nicely later on... */
+            0% { z-index: 7; transform: scale(0) rotate(32deg)    translateX(0)      translateY(0);      transform-origin: 50% 50%; }
+            5% { z-index: 7; transform: scale(0) rotate(32deg)    translateX(0)      translateY(0);      transform-origin: 50% 50%; }
+           15% { z-index: 7; transform: scale(1) rotate(32deg)    translateX(50px)   translateY(-30px);  transform-origin: calc(50% + 50px)  calc(50% - 30px); }
+           40% { z-index: 7; transform: scale(0.9) rotate(32deg)  translateX(400px)  translateY(-110px); transform-origin: calc(50% + 400px) calc(50% - 110px); }
+           45% { z-index: 7; transform: scale(0.6) rotate(70deg)  translateX(433px)  translateY(-117px); transform-origin: calc(50% + 439px) calc(50% - 110px); }
+           50% { z-index: 7; transform: scale(0.7) rotate(110deg) translateX(466px)  translateY(-121px); transform-origin: calc(50% + 476px) calc(50% - 111px); }
+           55% { z-index: 7; transform: scale(1)   rotate(165deg) translateX(500px)  translateY(-100px); transform-origin: calc(50% + 510px) calc(50% - 90px); }
+           60% { z-index: 9; transform: scale(1.1) rotate(200deg) translateX(500px)  translateY(-70px);  transform-origin: calc(50% + 500px) calc(50% - 70px); }
+           65% { z-index: 9; transform: scale(1.2) rotate(220deg) translateX(466px)  translateY(-80px);  transform-origin: calc(50% + 466px) calc(50% - 80px); }
+           90% { z-index: 9; transform: scale(0.8) rotate(200deg) translateX(20px)   translateY(-20px);  transform-origin: calc(50% + 20px)  calc(50% - 20px); }
+          100% { z-index: 9; transform: scale(0) rotate(190deg)   translateX(0)      translateY(0);      transform-origin: 50% 50%; }
+        }
+        .rocket::after {
+          content: '🚀';
+          position: absolute;
+          will-change: transform;
+          animation:  1s ease-in-out infinite alternate rocketWobbling;
+        }
+        @keyframes rocketWobbling {
+            0% { transform: rotate(5deg); }
+          100% { transform: rotate(-5deg); }
+        }
+
+        .earth {
+          position: absolute;
+          left: 90px;
+          top: 200px;
+          font-size: 60px;
+          line-height: 60px;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          overflow: hidden;
+          animation: var(--duration) ease-in-out infinite normal earthMoving;
+        }
+        @keyframes earthMoving {
+            0% { transform: scale(1) translateX(0)         translateY(0); }
+           10% { transform: scale(1) translateX(0)         translateY(0); }
+           50% { transform: scale(0.1) translateX(-1500px) translateY(200px); }
+           60% { transform: scale(0.1) translateX(-1500px) translateY(200px); }
+          100% { transform: scale(1) translateX(0)         translateY(0); }
+        }
+        .earth::before {
+          content: '🌎';
+          position: absolute;
+          left: -1px;
+          top: 2px;
+        }
+        .earth::after {
+          content: '🌏🌍🌎🌏🌍';
+          letter-spacing: -5px;
+          white-space: nowrap;
+          position: absolute;
+          will-change: transform;
+          animation:  30s linear infinite earthSpinning;
+        }
+        @keyframes earthSpinning {
+            0% { transform: translateX(-20%); }
+          100% { transform: translateX(-80%); }
+        }
+      </style>
+      <div class="container">
+        <div class="space"></div>
+        <div class="rocket"></div>
+        <div class="earth"></div>
+        <div class="planet"></div>
+      </div>
+    </div>
+  </foreignObject>
+</svg>
